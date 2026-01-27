@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gicycles</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            color: #e0e0e0;
+            position: relative;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+        header {
+            background: #1f1f1f;
+            color: #e0e0e0;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: inset 8px 8px 16px #0d0d0d, inset -8px -8px 16px #2b2b2b;
+        }
+        .subheading {
+            font-size: 1.2em;
+            color: #b0b0b0;
+            margin-top: 5px;
+        }
+        .content {
+            background: #1f1f1f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 8px 8px 16px #0d0d0d, -8px -8px 16px #2b2b2b;
+        }
+        h1 {
+            color: #66b3ff;
+            border-bottom: 2px solid #66b3ff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        p {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #66b3ff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 4px 4px 8px #0d0d0d, -4px -4px 8px #2b2b2b;
+        }
+        button:hover {
+            background-color: #558dbf;
+            box-shadow: 2px 2px 4px #0d0d0d, -2px -2px 4px #2b2b2b;
+        }
+        .news {
+            background: #1f1f1f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            display: none;
+            box-shadow: 8px 8px 16px #0d0d0d, -8px -8px 16px #2b2b2b;
+        }
+        .news h2 {
+            color: #66b3ff;
+            border-bottom: 2px solid #66b3ff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .news p {
+            border-right: 2px solid rgba(224, 224, 224, 0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(40, end) forwards;
+        }
+        .thrilled {
+            color: #ffd700;
+            font-weight: bold;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 3px #ffd700, 0 0 6px #ffd700;
+                transform: scale(1);
+            }
+            to {
+                text-shadow: 0 0 6px #ffd700, 0 0 12px #ffd700;
+                transform: scale(1.1);
+            }
+        }
+        .background-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(224, 224, 224, 0.05);
+            font-size: 6em;
+            z-index: 1;
+            text-align: center;
+            width: 100%;
+            font-style: italic;
+        }
+        .time {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #66b3ff;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 0 10px;
+            }
+            header, .content, .news {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .background-text {
+                font-size: 3em;
+            }
+            .time {
+                font-size: 1em;
+            }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+    <script>
+        function toggleNews() {
+            var newsSection = document.getElementById("news");
+            var headers = newsSection.querySelectorAll('h2');
+            var paragraphs = newsSection.querySelectorAll('p');
+            if (newsSection.style.display === "none" || newsSection.style.display === "") {
+                newsSection.style.display = "block";
+                requestAnimationFrame(function() {
+                    headers.forEach(function(header) {
+                        header.style.transform = 'translateX(0)';
+                        header.style.opacity = '1';
+                    });
+                    paragraphs.forEach(function(paragraph) {
+                        paragraph.style.width = '100%';
+                    });
+                });
+            } else {
+                headers.forEach(function(header) {
+                    header.style.transform = 'translateX(-100%)';
+                    header.style.opacity = '0';
+                });
+                paragraphs.forEach(function(paragraph) {
+                    paragraph.style.width = '0';
+                });
+                setTimeout(function() {
+                    newsSection.style.display = "none";
+                }, 500);
+            }
+        }
+
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var currentTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('time').innerText = currentTime;
+            setTimeout(updateTime, 1000);
+        }
+        window.onload = updateTime;
+    </script>
+</head>
+<body>
+    <div class="background-text">Where good bicycles are made.</div>
+    <header>
+        <h1>We are Gicycles</h1>
+        <div class="subheading">just a school project...took it too serious, sorry</div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to our website</h1>
+            <p>We plan to make good bicycles available in <span class="thrilled">every country.</span> Click below to learn more.</p>
+            <div class="time" id="time"></div>
+            <button onclick="toggleNews()">Learn More About Us</button>
+        </div>
+        <div class="news" id="news">
+            <h2>About Us</h2>
+            <p>Welcome to our website. We are Gicycles, a team willing to give it our all to bring bicycles
+            in a new way. We hope to succeed in this big--wait no, <b>class</b> project!</p>
+            <h2>Check Us Out</h2>
+            <p>What did you expect? This is just a school project, I won't add social medias.</p>
+        </div>
+    </div>
+</body>
+</html>
