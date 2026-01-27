@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>! Mission Accomplished !</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background: #fff;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards ease-out;
+        }
+        .container h1, .container h2 {
+            margin: 10px 0;
+        }
+        .container h1 span, .container h2 span {
+            color: #2575fc;
+            font-weight: bold;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><b>success yipee the</b></h1>
+        <h2>Your payment is $0. This grants you the access to the following:</h2>
+        <ul>
+        <li>Bike (just imagine it cause this is just a school project)</li>
+        <li>Access to (PDF) My Notebook Chapter 2</li>
+        </ul>
+        <h2>It is appreciated for your patience,</h2>
+        <h1>Thank you!</h1>
+        <button src="https://worstbicycles.github.io/gicycles/notebook.pdf>"Your PDF copy of My Notebook Chapter 2"></button>
+    </div>
+</body>
+</html>
